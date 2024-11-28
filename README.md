@@ -34,8 +34,7 @@ npm install
 
 3. Install shadcn/ui components
 ```bash
-npx shadcn-ui@latest init
-npx shadcn-ui@latest add card accordion alert badge scroll-area
+npx shadcn@latest init
 ```
 
 4. Run the development server
