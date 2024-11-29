@@ -6,83 +6,97 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { AlertCircle, Link as LinkIcon, GitFork, Code2, Database, Zap, Menu, ArrowRight } from "lucide-react";
+import { AlertCircle, Link as LinkIcon, GitFork, Code2, Database, Zap } from "lucide-react";
 import Link from 'next/link';
 import { accordionSections } from "@/lib/config";
 import { getSectionDetails } from "@/lib/section-details";
+import { MSCI_COLORS } from "@/lib/brand";
 
-export interface MCPSummaryProps {
-  className?: string;
-}
-
-const GOOGLE_COLORS = ['#4285F4', '#DB4437', '#F4B400', '#0F9D58'];
-
-export const MCPSummary: React.FC<MCPSummaryProps> = ({ className }) => {
+export default function MCPResearchPage() {
   return (
-    <div className={`min-h-screen bg-gray-50 p-6 ${className}`}>
+    <div className="min-h-screen bg-gray-50 p-6">
       <div className="mx-auto mt-20 max-w-4xl space-y-8">
-        {/* Search Bar - Material 3 Style */}
+        {/* Search Bar - MSCI Style */}
         <div className="mx-auto max-w-2xl">
           <div className="flex h-14 items-center justify-between rounded-2xl border bg-white px-6 shadow-sm transition-shadow hover:shadow-md">
-            <span className="font-medium text-[#4285F4]">Model Context Protocol</span>
+            <span className="font-medium" style={{ color: MSCI_COLORS.primary }}>
+              Model Context Protocol
+            </span>
             <div className="flex items-center gap-3">
-              <div className="h-4 w-4 rounded-full bg-[#DB4437]"></div>
-              <div className="h-4 w-4 rounded-full bg-[#F4B400]"></div>
-              <div className="h-4 w-4 rounded-full bg-[#4285F4]"></div>
-              <div className="h-4 w-4 rounded-full bg-[#0F9D58]"></div>
+              <div className="h-4 w-4 rounded-full" style={{ backgroundColor: MSCI_COLORS.primary }}></div>
+              <div className="h-4 w-4 rounded-full" style={{ backgroundColor: MSCI_COLORS.secondary }}></div>
+              <div className="h-4 w-4 rounded-full" style={{ backgroundColor: MSCI_COLORS.accent }}></div>
             </div>
           </div>
         </div>
 
-        {/* Header Section - Material 3 Card */}
+        {/* Header Section */}
         <Card className="overflow-hidden rounded-3xl border-none bg-white shadow-sm transition-shadow hover:shadow-md">
           <CardHeader className="pb-8 pt-12">
             <div className="flex items-center gap-2">
-              <Badge className="rounded-full bg-[#4285F4] px-4 py-1 text-sm text-white hover:bg-[#4285F4]/90">
-                New Standard
+              <Badge 
+                className="rounded-full px-4 py-1 text-sm text-white"
+                style={{ backgroundColor: MSCI_COLORS.primary }}
+              >
+                Technical Standard
               </Badge>
-              <Badge variant="outline" className="rounded-full border-[#4285F4] px-4 py-1 text-sm text-[#4285F4]">
+              <Badge 
+                variant="outline" 
+                className="rounded-full px-4 py-1 text-sm"
+                style={{ borderColor: MSCI_COLORS.primary, color: MSCI_COLORS.primary }}
+              >
                 2024
               </Badge>
             </div>
-            <CardTitle className="text-4xl font-normal tracking-tight text-gray-800">
+            <CardTitle 
+              className="text-4xl font-normal tracking-tight"
+              style={{ color: MSCI_COLORS.primary }}
+            >
               Model Context Protocol (MCP)
             </CardTitle>
             <CardDescription className="text-lg text-gray-600">
-              An open standard revolutionizing how AI assistants connect with data sources
+              An open standard enabling seamless integration between AI systems and investment data
             </CardDescription>
           </CardHeader>
         </Card>
 
-        {/* Overview Alert - Material 3 Style */}
-        <Alert className="rounded-2xl border-none bg-[#4285F4]/10 p-6 transition-shadow hover:shadow-sm">
-          <AlertCircle className="h-6 w-6 text-[#4285F4]" />
-          <AlertTitle className="text-lg font-medium text-[#4285F4]">Core Purpose</AlertTitle>
+        {/* Overview Alert */}
+        <Alert 
+          className="rounded-2xl border-none p-6 transition-shadow hover:shadow-sm"
+          style={{ backgroundColor: `${MSCI_COLORS.primary}10` }}
+        >
+          <AlertCircle className="h-6 w-6" style={{ color: MSCI_COLORS.primary }} />
+          <AlertTitle 
+            className="text-lg font-medium"
+            style={{ color: MSCI_COLORS.primary }}
+          >
+            Core Purpose
+          </AlertTitle>
           <AlertDescription className="mt-2 text-gray-700">
-            MCP provides a standardized way to connect LLMs with the context they need, enabling seamless integration between AI applications and external data sources.
+            MCP provides a standardized way to connect LLMs with investment context, enabling seamless integration between AI applications and wealth management data sources.
           </AlertDescription>
         </Alert>
 
-        {/* Main Content - Material 3 Card */}
+        {/* Main Content */}
         <Card className="rounded-3xl border-none bg-white shadow-sm transition-shadow hover:shadow-md">
           <CardContent className="p-6">
             <ScrollArea className="h-[600px] pr-4">
               <Accordion type="single" collapsible className="space-y-4">
                 {accordionSections.map((section, index) => {
-                  const color = GOOGLE_COLORS[index % GOOGLE_COLORS.length];
-                  const detailedSection = getSectionDetails(section.id);
-                  
                   return (
                     <AccordionItem 
                       key={section.id} 
                       value={section.id} 
                       className="rounded-2xl border border-gray-100 px-6 py-4 shadow-sm transition-all hover:shadow-md"
-                      style={{ borderLeft: `4px solid ${color}` }}
+                      style={{ borderLeft: `4px solid ${MSCI_COLORS.primary}` }}
                     >
                       <AccordionTrigger className="hover:no-underline">
                         <div className="flex items-center gap-3">
                           <div className="rounded-full bg-gray-50 p-2">
-                            <section.icon className="h-6 w-6" style={{ color }} />
+                            <section.icon 
+                              className="h-6 w-6" 
+                              style={{ color: MSCI_COLORS.primary }}
+                            />
                           </div>
                           <span className="text-lg font-medium text-gray-800">
                             {section.title}
@@ -97,7 +111,7 @@ export const MCPSummary: React.FC<MCPSummaryProps> = ({ className }) => {
                           >
                             <span 
                               className="mt-1.5 h-2 w-2 rounded-full" 
-                              style={{ backgroundColor: color }}
+                              style={{ backgroundColor: MSCI_COLORS.primary }}
                             ></span>
                             <p className="text-gray-600">{item}</p>
                           </div>
@@ -107,10 +121,10 @@ export const MCPSummary: React.FC<MCPSummaryProps> = ({ className }) => {
                         <Link
                           href={`/details/${section.id}`}
                           className="mt-4 flex w-full items-center justify-between rounded-xl border border-gray-100 bg-white p-4 text-left transition-all hover:border-[#4285F4] hover:shadow-sm"
-                          style={{ color }}
+                          style={{ color: MSCI_COLORS.primary }}
                         >
                           <span className="font-medium">Read detailed analysis</span>
-                          <ArrowRight className="h-5 w-5" />
+                          <span className="text-xl">→</span>
                         </Link>
                       </AccordionContent>
                     </AccordionItem>
@@ -121,34 +135,39 @@ export const MCPSummary: React.FC<MCPSummaryProps> = ({ className }) => {
           </CardContent>
         </Card>
 
-        {/* Footer Links - Material 3 Style */}
+        {/* Footer Links */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <a 
-            href="https://modelcontextprotocol.io" 
-            className="flex items-center gap-3 rounded-2xl bg-[#4285F4] px-8 py-4 text-white shadow-sm transition-all hover:bg-[#4285F4]/90 hover:shadow-md"
+            href="https://www.msci.com/technology-solutions" 
             target="_blank"
             rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-2xl px-8 py-4 text-white shadow-sm transition-all hover:shadow-md"
+            style={{ backgroundColor: MSCI_COLORS.primary }}
           >
             <LinkIcon className="h-5 w-5" />
-            <span className="font-medium">Official Documentation</span>
+            <span className="font-medium">MSCI Technology</span>
           </a>
           <a 
             href="https://github.com/modelcontextprotocol" 
-            className="flex items-center gap-3 rounded-2xl bg-[#4285F4] px-8 py-4 text-white shadow-sm transition-all hover:bg-[#4285F4]/90 hover:shadow-md"
             target="_blank"
             rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-2xl px-8 py-4 text-white shadow-sm transition-all hover:shadow-md"
+            style={{ backgroundColor: MSCI_COLORS.primary }}
           >
             <GitFork className="h-5 w-5" />
-            <span className="font-medium">GitHub Repository</span>
+            <span className="font-medium">Technical Docs</span>
           </a>
         </div>
 
-        {/* Material 3 Footer */}
+        {/* Footer */}
         <footer className="mt-12 rounded-3xl border border-gray-100 bg-white p-8">
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            {['Model Context Protocol', 'Documentation', 'Developer Resources', 'GitHub'].map((item, index) => (
+            {['MSCI Research', 'Documentation', 'Developer Resources', 'Contact'].map((item, index) => (
               <React.Fragment key={item}>
-                <button className="rounded-full px-4 py-2 text-gray-600 transition-colors hover:bg-gray-50">
+                <button 
+                  className="rounded-full px-4 py-2 transition-colors hover:bg-gray-50"
+                  style={{ color: MSCI_COLORS.primary }}
+                >
                   {item}
                 </button>
                 {index < 3 && (
@@ -161,6 +180,4 @@ export const MCPSummary: React.FC<MCPSummaryProps> = ({ className }) => {
       </div>
     </div>
   );
-};
-
-export default MCPSummary;
+}

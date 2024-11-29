@@ -1,5 +1,5 @@
-import { MCPSummary } from '@/components/mcp-summary';
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return <MCPSummary />;
+  redirect('/future-of-wealth');
 }
